@@ -27,11 +27,12 @@ Follow these steps to set up the project locally:
    git clone https://github.com/phuquiivo03/moveduck-sui-be
    ```
 2. Install packages:
-  ```sh
-  npm i
-  ```
-3. Run project
    ```sh
-    npm run dev
+   npm i
+     ```
+3. Create ⚙️ .env file
+4. Run project
+   ```sh
+   npm run dev
    
    ```
