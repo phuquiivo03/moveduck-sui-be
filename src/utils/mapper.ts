@@ -1,0 +1,2 @@
+export const quizMapper = ['bafkreih3q576toj7g7cubdajfah3w2lmeql5p72jebdhauaiwekgv2fk7a']
+export const transferMapper = ['0x05373a55e8295744c523e0dafccaf0040ca5b7fe53a2f0cc6d8cf51b51dd9956']
