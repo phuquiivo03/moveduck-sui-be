@@ -24,14 +24,13 @@ Follow these steps to set up the project locally:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/phuquiivo03/moveduck-sui-be
+      git clone https://github.com/phuquiivo03/moveduck-sui-be
    ```
 2. Install packages:
-  ```sh
-  npm i
-  ```
+   ```sh
+         npm i
+   ```
 3. Run project
    ```sh
-    npm run dev
-   
+      npm run dev
    ```
