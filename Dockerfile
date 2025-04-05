@@ -11,7 +11,10 @@ RUN bun install
 # Copy source code
 COPY . .
 
+
 EXPOSE 3000
+# build
+RUN bun build
 
 # Start the application directly with TypeScript
 CMD ["bun", "run", "start"]
