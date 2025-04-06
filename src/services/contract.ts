@@ -5,9 +5,10 @@ import { generateRandomString, getCoinInfo, getWalletBalances } from './utils';
 import { coinWithBalance, Transaction } from "@mysten/sui/transactions";
 import dotenv from 'dotenv';
 import { AuthorizeUserRequest, ContractCreatePoolEvent, StakeNFTsRequest, StakeTokenRequest } from '../dto/contract';
-import { CoinInfo } from '../type/contract';
+import { CoinInfo, CreatePoolEvent } from '../type/contract';
 import { LinkRepository, LinkRepositoryImpl } from '../repository/link';
 import { Link } from '../type/link';
+import poolModel from '../model/pool';
 dotenv.config();
 class ContractService {
     package: string;
@@ -71,10 +72,10 @@ class ContractService {
       
       // Process mint event data
       if (mintEvents && mintEvents.length > 0) {
-        const mintedObject = mintEvents[0].parsedJson;
+        const mintedObject: CreatePoolEvent = mintEvents[0].parsedJson as CreatePoolEvent;
         console.log('Minted object:', mintedObject);
+        poolModel.create({poolId: mintedObject.pool_id})
         return {
-          
           data: mintedObject,
           transaction: result};
       } else {
@@ -291,6 +292,11 @@ class ContractService {
             code: null}
       
       return link;
+    }
+
+    async latestPoolId() {
+      const pool = await poolModel.findOne({}).sort({createdAt: -1});
+      return pool?.poolId;
     }
 }
 

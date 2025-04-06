@@ -52,5 +52,10 @@ router.post("/stakeNfts", async (req, res) => {
     }
 })
 
+router.get("/latestPoolId", async (req, res) => {
+    const result = await contractService.latestPoolId();
+    res.status(200).json(result);
+})
+
 
 export default router;

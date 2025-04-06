@@ -14,3 +14,8 @@ export interface CoinInfo {
     balance: number;
     previousTransaction: string;
 }
+
+export interface CreatePoolEvent {
+    pool_id: string;
+    timestamp: string;
+}
