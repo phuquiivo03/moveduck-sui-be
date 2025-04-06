@@ -28,7 +28,7 @@ class ContractService {
       const key = decodeSuiPrivateKey(privateKey);
       const signer = Ed25519Keypair.fromSecretKey(key.secretKey);
       if (!signer)
-        return { code: 400, data: "Private key is invalid", status: false };
+        throw { code: 400, data: "Private key is invalid", status: false };
       // get token objects
     //   const coins = await getWalletBalances(this.client, signer.toSuiAddress());
         const tx = new Transaction()
@@ -92,7 +92,7 @@ class ContractService {
       const signer = Ed25519Keypair.fromSecretKey(key.secretKey);
       
       if (!signer)
-        return { code: 400, data: "Private key is invalid", status: false };
+        throw { code: 400, data: "Private key is invalid", status: false };
       
       // get owners token objects
       
@@ -127,7 +127,7 @@ class ContractService {
       );
       
       if (!coinWithSufficientBalance) {
-        return {
+        throw {
           message: `Insufficient balance. Required: ${amountInSmallestUnits}`,
         };
       }
@@ -183,7 +183,7 @@ class ContractService {
         return createdLink;
       } catch (error) {
         console.error("Transaction error:", error);
-        return {
+        throw {
           code: 500,
           message: "Transaction failed",
           error: error || error
@@ -197,7 +197,7 @@ class ContractService {
       const key = decodeSuiPrivateKey(privateKey);
       const signer = Ed25519Keypair.fromSecretKey(key.secretKey);
       if (!signer)
-        return { code: 400, data: "Private key is invalid", status: false };
+        throw { code: 400, data: "Private key is invalid", status: false };
       // get token objects
     //   const coins = await getWalletBalances(this.client, signer.toSuiAddress());
         const tx = new Transaction()
@@ -276,7 +276,11 @@ class ContractService {
   
         return createdLinks;  
       }catch(e) {
-        return e;
+        throw {
+          status: false,
+          code: 400,
+          message: (e as Error).message
+        }
       }
     }
 
@@ -288,8 +292,7 @@ class ContractService {
       });
 
       if(!link) 
-          return {
-            code: null}
+          throw "Link not found"
       
       return link;
     }
